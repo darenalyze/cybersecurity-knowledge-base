@@ -69,14 +69,14 @@ and folders — `r` and `w` control who can read or edit them, and `x` on
 a folder controls who can enter it.
 
 ## ❌ Errors Encountered:
-1. 
-```text
-Command 'ipconfig' not found, did you mean:
-    command 'iwconfig' from deb wireless-tools
-    command 'ifconfig' from deb net-tools
-    command 'hipconfig' from deb hipcc
-  Try: sudo apt install <deb name>
-  ```
+**Error 1**
+---
+    Command 'ipconfig' not found, did you mean:
+      command 'iwconfig' from deb wireless-tools
+      command 'ifconfig' from deb net-tools
+      command 'hipconfig' from deb hipcc
+    Try: sudo apt install <deb name>
+---
 
 ## ✅ Resolution:
 1. By reading the error carefully there is a line said `command 'ifconfig' from deb net-tools` by just checking the command name carefully, you will see it is a **"f"** instead of **"p"** trying this commands it gave me expected result (✅Fixed)
