@@ -19,11 +19,27 @@ for cybersecurity practice and future labs.
 3. Attached the Kali Linux ISO to the VM's optical drive
 4. Started the VM and followed the Kali installer
 
+
 ## ❌ Errors Encountered:
-- `VERR_SVM_DISABLED`
+- (Initial Setup)
+```
+  VERR_SVM_DISABLED
+  ```
+- (4:49 am 5/21/2026)
+```
+Could not start the machine kali linux because the following physical network interfaces were not found:
+Realtek PCIe GbE Family Controller (adapter 1)
+You can either change the machine's network settings or stop the machine.
+```
 
 ## ✅ Resolution:
-1. Booted into BIOS and enabled **Virtualization (SVM Mode)** (✅Fixed)
-   
+1. 
+   - Booted into the motherboard BIOS and enabled **Virtualization (SVM Mode)**. (Fixed initial setup error)
+2. 
+   - Open VirtualBox VM **Settings** -> **Network** -> **Adapter 1**.
+   - Under **Name**, changed the dropdown selection from the old network controller to the new hardware interface (`Realtek PCIe GbE Family Controller #2`).
+   - Clicked **OK** to save and successfully booted the VM. (Fixed 4: 55 am 5/21/2026)
+
 ## Lessons Learned:
 - VirtualBox requires **hardware virtualization** to be on at the firmware level
+- Changing or upgrading physical hardware (like a CPU or motherboard) can alter hardware identifiers, requiring VM network settings to be remapped.
