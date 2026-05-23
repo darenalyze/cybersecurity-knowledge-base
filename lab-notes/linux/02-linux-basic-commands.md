@@ -67,19 +67,21 @@ so you can run them on several targets at once without repeating the command.
 text files aren't programs. However, `chmod` still matters for text files
 and folders — `r` and `w` control who can read or edit them, and `x` on
 a folder controls who can enter it.
+- I prefer using `ss` over `netstat`. `ss` is much cleaner to read (for me).
+- I like how curl works. I can now look at page i want to visit without leaving at my terminal by asking their server to send me a copy of their page.
 
 ## ❌ Errors Encountered:
-1. 
-```text
-Command 'ipconfig' not found, did you mean:
-    command 'iwconfig' from deb wireless-tools
-    command 'ifconfig' from deb net-tools
-    command 'hipconfig' from deb hipcc
-  Try: sudo apt install <deb name>
-  ```
+Error 1
+---
+    Command 'ipconfig' not found, did you mean:
+        command 'iwconfig' from deb wireless-tools
+        command 'ifconfig' from deb net-tools
+        command 'hipconfig' from deb hipcc
+      Try: sudo apt install <deb name>
+---
 
 ## ✅ Resolution:
-1. By reading the error carefully there is a line said `command 'ifconfig' from deb net-tools` by just checking the command name carefully, you will see it is a **"f"** instead of **"p"** trying this commands it gave me expected result (✅Fixed)
+1. By reading the error carefully there is a line said `command 'ifconfig' from deb net-tools` by just checking the command name carefully, you will see it is a **"f"** instead of **"p"** trying this commands it gave me expected result (✅Fixed error 1)
 
 ## Practice Checklist
 - [x] Navigate the file system using only the terminal
