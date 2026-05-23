@@ -4,7 +4,7 @@ Welcome to my security testing and IT automation lab. This repository tracks my 
 
 ## 📂 Repository Structure
 * 📁 `automation-scripts/` - Python scripts for network automation and security tasks.
-* 📁 `lab-notes/` - Documentation and walkthroughs of TryHackMe simulations and security setups.
+* 📁 `lab-notes/` - Documentation and walkthroughs security setups.
 * 📁 `defensive-tools/` - Custom scripts built to analyze logs or test defenses.
 
 ## 🛠️ Skills & Technologies
