@@ -62,7 +62,6 @@ so you can run them on several targets at once without repeating the command.
 - I want to ping my **IP address** but instead I got an Error `Command 'ipconfig' not found`. I was confused at the commands at first. It looks like `ipconfig` (from Windows command). I looked carefully at the command in linux and it's actually `ifconfig` (I put **"p"** instead of **"f"**)
 - I expected using `touch` command on an existing file will create an error but surprisingly it only updates the file's access and modification timestamps.
 - I learned that terminal in Linux is case-sensitive unlike Windows terminal.
-- I use `ls -l file1` to check the **file permission** of the **"file1"** it gives me `-rw-rw-r-- 1 dar4sec dar4sec 4 may 20 07:15`. it confused me at first but a bit of research i finnaly break it down. the first set of data `-rw-rw-r--` is called "file permissions". the second one `1` called "link". the first `dar4sec` is owner/user. the second one is called "group", and the last data is obviously a date when the file last modified.
 - The execute (`x`) permission on a plain text file makes no sense since
 text files aren't programs. However, `chmod` still matters for text files
 and folders — `r` and `w` control who can read or edit them, and `x` on
