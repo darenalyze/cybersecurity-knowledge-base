@@ -1,11 +1,7 @@
 # Linux User Management
-
-> **Goal:** Understand how Linux manages users, groups, and privileges.
-
+> **Goal:** Understand how Linux manages users, groups, and privileges.  
 > **Environment:** VirtualBox / Kali Linux Terminal
-
 ---
-
 ## Users
 | Command | Description | Example |
 |---------|-------------|---------|
@@ -15,9 +11,7 @@
 | `adduser` | Create a new user | `sudo adduser john` |
 | `passwd` | Change password | `passwd john` |
 | `deluser` | Delete a user | `sudo deluser john` |
-
 ---
-
 ## Groups
 | Command | Description | Example |
 |---------|-------------|---------|
@@ -25,9 +19,7 @@
 | `addgroup` | Create a new group | `sudo addgroup devs` |
 | `usermod` | Add user to a group | `sudo usermod -aG devs john` |
 | `delgroup` | Delete a group | `sudo delgroup devs` |
-
 ---
-
 ## Switching Users & Privileges
 | Command | Description | Example |
 |---------|-------------|---------|
@@ -35,44 +27,49 @@
 | `su -` | Switch to root | `su -` |
 | `sudo` | Run command as root | `sudo apt update` |
 | `sudo -l` | List your sudo permissions | `sudo -l` |
-
 ---
-
 ## Important Files
 | File | Description |
 |------|-------------|
 | `/etc/passwd` | Stores user account info |
-| `/etc/shadow` | Stores encrypted passwords |
+| `/etc/shadow` | Stores hashed passwords |
 | `/etc/group` | Stores group info |
-
 ---
-
 ## Notes & Observations
-- I often use `whoami` because I always check if I am on the right user. This will be useful when you have 2 or more users on one computer (I am planning to create 2 user. one for attack—one for Defense).
-- For me `who` is perfect use and effective when looking at past attacks because it let you know when the attacker open the machine.
-- `attacker is not in the sudoers file.` having this error means I can't add a user or create a user by default of new created user even with sudo because attacker is not in the sudoers group.
-
+- I often use `whoami` because I always check if I am on the right user. This will be useful when you have 2 or more users on one computer (I am planning to create 2 users — one for attack, one for defense).
+- For me `who` is perfect for checking currently logged-in users.
+- `attacker is not in the sudoers file.` — having this error means I can't add a user or create a user by default for a newly created user, even with sudo, because the attacker is not in the sudoers group.
+- Running `sudo -l` I realize that there is a limit in sudo and it depends on your permission.
+- I often use `cat /etc/passwd` to check the users I created and delete some that I am not using anymore using `sudo deluser [username]`.
+- `su` is one of the most useful commands when you have many user accounts on one PC, since it lets you switch users easily without needing to restart your PC completely.
+- Running `cat /etc/shadow` gave me unexpected output `cat: /etc/shadow: Permission denied` I think because `/etc/shadow` is restricted to root only by its file permissions, so regular users cannot read it.
 ---
-
 ## ❌ Errors Encountered
 **Error 1**
 ---
     Fatal: Only root may add a user or group to the system.
 ---
-
-**Error2**
+**Error 2**
 ---
     attacker is not in the sudoers file.
        |
     (username)
 ---
-
-
-
+**Error 3**
+---
+    su: Authentication failure
+---
+**Error 4**
+---
+    cat: /etc/shadow: Permission denied
+---
 ## ✅ Resolution
-1. **Fatal error** — Used `sudo` before the command to run it as root.
-2. **Sudoers error** — Added the user to the `sudo` group using `sudo usermod -aG sudo (username)` to grant sudo privileges.
-
+1. **Fatal error** — Used `sudo` before the command to run it as root. (✅ fixed)
+2. **Sudoers error** — Added the user to the `sudo` group using `sudo usermod -aG sudo (username)` to grant sudo privileges. (✅ fixed)
+3. **Authentication Failed**  
+   — Used `sudo` (❌ failed)  
+   — Just a wrong input password. I typed carefully the right password. (✅ fixed)
+4. **Permission denied** — Used `sudo` before the command to run it as root. (✅ fixed)
 ## Practice Checklist
 - [x] Check your current user and ID
 - [x] Create a new user and set a password
