@@ -11,7 +11,7 @@
 | 1.2 | Organizational Data | ✅ |
 | 1.3 | What Was Taken? | ✅ |
 | 1.4 | Cyber Attackers | ✅ |
-| 1.5 | Cyberwarfare | ⬜ |
+| 1.5 | Cyberwarfare | 🔄 |
 
 ### 📘 Module 2
 | # | Topic | Status |
