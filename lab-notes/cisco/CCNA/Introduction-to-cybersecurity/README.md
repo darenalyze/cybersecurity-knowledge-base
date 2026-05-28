@@ -4,7 +4,7 @@
 - 🔄 On going
 - ⬜ Not Started
 ---
-### 📘 Module 1
+### 📘 Module 1: Introduction to Cybersecurity
 | # | Topic | Status |
 |---|-------|--------|
 | 1.1 |  The World of Cybersecurity |✅|
@@ -13,7 +13,7 @@
 | 1.4 | Cyber Attackers | ✅ |
 | 1.5 | Cyberwarfare | ✅ |
 
-### 📘 Module 2
+### 📘 Module 2: Attacks, Concepts and Techniques
 | # | Topic | Status |
 |---|-------|--------|
 | 2.1 | Analyzing a Cyber Attack | 🔄 |
