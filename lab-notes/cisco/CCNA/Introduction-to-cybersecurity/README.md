@@ -16,5 +16,5 @@
 ### 📘 Module 2
 | # | Topic | Status |
 |---|-------|--------|
-| 2.1 | Analyzing a Cyber Attack | ⬜ |
+| 2.1 | Analyzing a Cyber Attack | 🔄 |
 
