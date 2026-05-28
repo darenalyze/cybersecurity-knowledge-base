@@ -1,51 +1,7 @@
 # File Permissions
-> **Goal:** Understand how Linux controls access to files and directories.
+> **Goal:** Understand how Linux controls access to files and directories.  
 > **Environment:** VirtualBox / Kali Linux Terminal
 ---
-
-## Permission Basics
-| Permission | Symbol | Value |
-|------------|--------|-------|
-| Read       | `r`    | 4     |
-| Write      | `w`    | 2     |
-| Execute    | `x`    | 1     |
-| No Permission | `-` | 0     |
----
-
-## Commands
-| Command | Description | Example |
-|---------|-------------|---------|
-| `ls -l` | List files with permissions | `ls -l` |
-| `chmod` | Change file permissions | `chmod 755 file.sh` |
-| `chown` | Change file owner | `chown john file.txt` |
-| `chgrp` | Change group owner | `chgrp devs file.txt` |
-| `umask` | Default permission mask | `umask 022` |
----
-
-## Numeric (Octal) Mode
-| Octal | Permission | Meaning |
-|-------|------------|---------|
-| `777` | rwxrwxrwx  | Everyone can do everything |
-| `755` | rwxr-xr-x  | Owner full, others read/execute |
-| `644` | rw-r--r--  | Owner read/write, others read |
-| `600` | rw-------  | Owner only |
-| `000` | ---------- | No permissions |
----
-
-## Important Files & Permissions
-| File | Permission | Why |
-|------|------------|-----|
-| `/etc/shadow` | `640` | Root read, shadow group only |
-| `/etc/passwd` | `644` | Everyone can read |
-| `/etc/sudoers` | `440` | Read only, root only |
----
-
-## Notes & Observations
-# File Permissions
-> **Goal:** Understand how Linux controls access to files and directories.
-> **Environment:** VirtualBox / Kali Linux Terminal
----
-
 ## Permission Basics
 | Permission | Symbol | Value |
 |------------|--------|-------|
@@ -106,27 +62,7 @@ Error 2
 1. **Permission denied** — The file had `000` permissions. Used `sudo chmod` to restore permissions. (✅ fixed)
 2. **Operation not permitted** — Regular users cannot change file ownership. Used `sudo` before `chown` to run it as root. (✅ fixed)
 ---
-## Practice Checklist
-- [x] Check permissions of a file using `ls -l`
-- [x] Change permissions using `chmod`
-- [x] Change ownership using `chown`
-- [ ] Check permissions of `/etc/shadow` and `/etc/passwd`
-- [ ] Create a script and make it executable
----
 
-## ❌ Errors Encountered
-Error 1
----
-    Error opening file Permission denied
----
-Error 2
----
-    Opperation not permitted
----
-## ✅ Resolution
-### "Error 1, 2" 
-- I used sudo to use the root permission
----
 ## Practice Checklist
 - [x] Check permissions of a file using `ls -l`
 - [x] Change permissions using `chmod`
