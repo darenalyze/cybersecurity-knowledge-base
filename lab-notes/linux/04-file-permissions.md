@@ -67,5 +67,4 @@ Error 2
 - [x] Check permissions of a file using `ls -l`
 - [x] Change permissions using `chmod`
 - [x] Change ownership using `chown`
-- [ ] Check permissions of `/etc/shadow` and `/etc/passwd`
-- [ ] Create a script and make it executable
+- [x] Check permissions of `/etc/shadow` and `/etc/passwd`
