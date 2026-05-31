@@ -1,7 +1,6 @@
 # Linux Basic Commands
 
-> **Goal:** Learn and document essential Linux commands for cybersecurity work.
-
+> **Goal:** Learn and document essential Linux commands for cybersecurity work.  
 > **Environment:** VirtualBox / Terminal
 
 ---
