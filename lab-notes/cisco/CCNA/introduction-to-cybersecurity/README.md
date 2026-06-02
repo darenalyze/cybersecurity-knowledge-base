@@ -1,5 +1,5 @@
 # 📋 Progress Tracker
-## Legends
+## 📌 Legends
 - ✅ Done
 - 🔄 On going
 - ⬜ Not Started
