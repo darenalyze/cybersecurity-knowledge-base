@@ -1,11 +1,12 @@
 # 🔵 Cisco Notes
-Notes from Cisco NetAcad courses
+> Notes from Cisco NetAcad courses
+---
 
-## Legends
+## 📌 Legends
 - ✅ Done
 - 🔄 On going
 - ⬜ Not Started
----
+
 
 ## 📋 Progress Tracker
 
