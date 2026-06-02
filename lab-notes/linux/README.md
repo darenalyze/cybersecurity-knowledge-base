@@ -2,7 +2,7 @@
 > Hands-on Linux notes covering system administration
 and command line usage.
 ---
-## Legends
+## 📌 Legends
 - ✅ Done
 - 🔄 On going
 - ⬜ Not Started
