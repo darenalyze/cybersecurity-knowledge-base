@@ -1,5 +1,5 @@
 # 🐧 Linux Notes
-Hands-on Linux notes covering system administration
+> Hands-on Linux notes covering system administration
 and command line usage.
 ---
 ## Legends
