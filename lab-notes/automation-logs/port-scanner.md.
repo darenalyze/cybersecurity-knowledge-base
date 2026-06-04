@@ -1,43 +1,111 @@
 # Port Scanner
-
-> **Date:** June 3, 2026  
-> **Language Used:** Python  
-> **IDE:** Visual Studio Code  
-
+ 
+> **Date:** June 3, 2026
+> **Language Used:** Python
+> **IDE:** Visual Studio Code
+ 
 ---
+ 
 ## Goal
-- [ ] Accept target IP as input
-- [ ] Scan ports from 1 to 65535
-- [ ] Detect open ports
-- [ ] Detect filtered ports
-- [ ] Detect closed ports
+ 
+- [x] Accept target IP as input
+- [x] Scan ports from 1 to 1024
+- [x] Detect open ports
+- [x] Detect closed ports
 - [ ] Export results to a file
-
+---
+ 
 ## Process
-- I researched how to detect ports using Python and one of the
-    recommended tools was the `socket` library from Python's
-    standard library. 
-- I studied how to use it and understood its functions what i only needs
-    from: https://docs.python.org/3/library/socket.html#socket.socket and
-    https://github.com/python/cpython/blob/3.14/Lib/socket.py
-    before using it, then made a plan.
-
+ 
+- Researched how to detect port states using Python. The recommended tool was the `socket` library from Python's standard library.
+- Studied the official documentation and source before writing any code:
+  - https://docs.python.org/3/library/socket.html#socket.socket
+  - https://github.com/python/cpython/blob/3.14/Lib/socket.py
+- Discovered that `connect_ex()` returns integer error codes from the OS (not exceptions), making it cleaner to use inside a loop compared to `connect()`.
+- Windows uses **WSA (Windows Sockets API)** error codes, which are different from Linux error codes. An `other` list was added to catch any unrecognized codes rather than silently dropping them.
 ### Step-by-Step Logic
+ 
+```
+START
+    resolve hostname to target IP
+    scan each port from 1 to 1024
+        create a new TCP socket
+        set timeout to 0.1 seconds
+        attempt connection via connect_ex()
+        if result == 0       → port is OPEN
+        if result == 10035   → port is CLOSED (Windows: would block / timed out)
+        else                 → port is OTHER (log the error code)
+        close socket
+    print open, closed, and other port lists
+END
+```
+ 
 ---
-    START
-        input target IP address
-        scan each port from 1 to 65535
-            try to connect to the port
-            if connection success → port is OPEN
-            if connection timeout → port is FILTERED
-            if connection refused → port is CLOSED
-        return open and filtered ports
-        export results to a file
-    END
-
-- 
+ 
+## WSA Error Code Reference
+ 
+| Code | Name | Meaning |
+|------|------|---------|
+| `0` | Success | Port is **open** |
+| `10013` | `WSAEACCES` | Permission denied — run as Administrator |
+| `10022` | `WSAEINVAL` | Invalid argument — bad socket setup |
+| `10035` | `WSAEWOULDBLOCK` | Still trying / no answer within timeout — treated as **closed** |
+| `10038` | `WSAENOTSOCK` | Not a socket — socket was already closed |
+| `10048` | `WSAEADDRINUSE` | Address already in use |
+| `10049` | `WSAEADDRNOTAVAIL` | Address not available — IP does not exist |
+| `10051` | `WSAENETUNREACH` | Network unreachable — no route to target |
+| `10054` | `WSAECONNRESET` | Connection reset by target |
+| `10060` | `WSAETIMEDOUT` | Timed out — actual timeout code |
+| `10061` | `WSAECONNREFUSED` | Connection refused — port is **closed** (clean rejection) |
+| `10064` | `WSAEHOSTDOWN` | Host is down |
+| `10065` | `WSAEHOSTUNREACH` | Host unreachable |
+ 
+> **Note:** `10035` does not mean "timed out" — it means "would block," which is Windows telling the socket it hasn't resolved yet. Since the scanner moves on after the timeout, it is treated as closed in practice. The actual timeout code is `10060`.
+ 
+---
+ 
 ## Errors Encountered
-Error 1
-> this is a result from `port_status = sock.connect_ex((Target_ip, port))` which is really hard to tell what it is because expect outputs is **0(open), 110(filtered) and 111(closed).**
+ 
+### Error 1 — Unexpected result codes from `connect_ex()`
+ 
+**Expected outputs:** `0` (open), `110` (filtered), `111` (closed)
+ 
+**Actual outputs:** `10035`, `10038`
+ 
+**Cause:** The expected codes `110` and `111` are Linux-only. Windows uses WSA error codes instead.
+ 
+**Resolution:** Researched Windows-specific codes. Mapped `10035` as closed (still trying / no answer) and `10038` as a socket state issue caused by reusing a closed socket. Fixed by creating a new socket for each port inside the loop.
+ 
 ---
-    10022, 10035 and 10038
+ 
+### Error 2 — Port `137` appearing in `other` list
+ 
+**Cause:** Port `137` is a **UDP port** (NetBIOS Name Service). The scanner uses `SOCK_STREAM` which is TCP only. TCP cannot properly connect to a UDP port, so it returns an unrecognized code instead of `0` or `10035`.
+ 
+**Resolution:** Logged it in the `other` list. A full scanner would require a separate `SOCK_DGRAM` socket to scan UDP ports.
+ 
+---
+ 
+## Scan Results (localhost)
+ 
+**Target:** `127.0.0.1` (localhost)
+**Range:** Ports `1–1024`
+**Timeout:** `0.1s` per port
+ 
+| Status | Ports |
+|--------|-------|
+| ✅ Open | `135`, `139`, `445` |
+| ⚠️ Other | `137` |
+| ❌ Closed | All remaining ports |
+ 
+> **Port 135** — RPC (Remote Procedure Call), standard Windows system port.
+> **Port 139** — NetBIOS Session Service, used for Windows file and printer sharing.
+> **Port 445** — SMB (Server Message Block), Windows file sharing protocol.
+> **Port 137** — NetBIOS Name Service (UDP). Landed in `other` because it is a UDP port and this scanner is TCP only.
+ 
+---
+ 
+## Notes
+ 
+- Scanning all 65535 ports at `1.0s` timeout takes approximately 18 hours. At `0.1s`, scanning ports `1–1024` is manageable for testing.
+- Closed ports eat the full timeout before moving on. Open ports respond almost instantly.
