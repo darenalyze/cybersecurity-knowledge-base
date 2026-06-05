@@ -1,31 +1,34 @@
 # Port Scanner
- 
 > **Date:** June 3, 2026
 > **Language Used:** Python
 > **IDE:** Visual Studio Code
- 
 ---
  
 ## Goal
- 
 - [x] Accept target IP as input
 - [x] Scan ports from 1 to 1024
 - [x] Detect open ports
 - [x] Detect closed ports
-- [ ] Export results to a file
+- [x] Export results to a file
 ---
- 
+## New Features
+- 6/6/2026 - 10061 (WSAECONNREFUSED) added as a second closed condition. Unlike 10035 which is a timeout/no-response, this code means the target actively rejected the connection, which is closed state.
+- 6/6/2026 - The result of **Closed, Open and Other Ports** will be transferred in file instead of just printing the output in terminal.
+
 ## Process
- 
 - Researched how to detect port states using Python. The recommended tool was the `socket` library from Python's standard library.
 - Studied the official documentation and source before writing any code:
   - https://docs.python.org/3/library/socket.html#socket.socket
   - https://github.com/python/cpython/blob/3.14/Lib/socket.py
 - Discovered that `connect_ex()` returns integer error codes from the OS (not exceptions), making it cleaner to use inside a loop compared to `connect()`.
-- Windows uses **WSA (Windows Sockets API)** error codes, which are different from Linux error codes. An `other` list was added to catch any unrecognized codes rather than silently dropping them.
+- Windows uses **WSA (Windows Sockets API)** error codes, which are different from Linux error codes. An `other-port` list was added to catch any unrecognized codes rather than silently dropping them.
+- I put the `sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)` inside the loop because it gives me `10038` as a socket state issue caused by reusing a closed socket.
+- The use of `connect_ex()` instead of using `connect()` is because `connect_ex()` returns integer error codes instead of raising exceptions, making it cleaner to handle inside a loop without try/except.
+- Setting the timeout to `(1)` is kinda slow for me so I decided to switch to 0.1. I think that is still good because port is fast at responding when Open.
+- I use terminal for an output in the meantime because it is more convenient and easy to debug something.
+
 ### Step-by-Step Logic
- 
-```
+ ```
 START
     resolve hostname to target IP
     scan each port from 1 to 1024
@@ -39,11 +42,9 @@ START
     print open, closed, and other port lists
 END
 ```
- 
 ---
  
 ## WSA Error Code Reference
- 
 | Code | Name | Meaning |
 |------|------|---------|
 | `0` | Success | Port is **open** |
@@ -59,35 +60,24 @@ END
 | `10061` | `WSAECONNREFUSED` | Connection refused — port is **closed** (clean rejection) |
 | `10064` | `WSAEHOSTDOWN` | Host is down |
 | `10065` | `WSAEHOSTUNREACH` | Host unreachable |
- 
 > **Note:** `10035` does not mean "timed out" — it means "would block," which is Windows telling the socket it hasn't resolved yet. Since the scanner moves on after the timeout, it is treated as closed in practice. The actual timeout code is `10060`.
- 
 ---
  
 ## Errors Encountered
- 
+
 ### Error 1 — Unexpected result codes from `connect_ex()`
- 
 **Expected outputs:** `0` (open), `110` (filtered), `111` (closed)
- 
 **Actual outputs:** `10035`, `10038`
- 
 **Cause:** The expected codes `110` and `111` are Linux-only. Windows uses WSA error codes instead.
- 
 **Resolution:** Researched Windows-specific codes. Mapped `10035` as closed (still trying / no answer) and `10038` as a socket state issue caused by reusing a closed socket. Fixed by creating a new socket for each port inside the loop.
- 
 ---
  
 ### Error 2 — Port `137` appearing in `other` list
- 
 **Cause:** Port `137` is a **UDP port** (NetBIOS Name Service). The scanner uses `SOCK_STREAM` which is TCP only. TCP cannot properly connect to a UDP port, so it returns an unrecognized code instead of `0` or `10035`.
- 
 **Resolution:** Logged it in the `other` list. A full scanner would require a separate `SOCK_DGRAM` socket to scan UDP ports.
- 
 ---
  
 ## Scan Results (localhost)
- 
 **Target:** `127.0.0.1` (localhost)
 **Range:** Ports `1–1024`
 **Timeout:** `0.1s` per port
@@ -102,10 +92,8 @@ END
 > **Port 139** — NetBIOS Session Service, used for Windows file and printer sharing.
 > **Port 445** — SMB (Server Message Block), Windows file sharing protocol.
 > **Port 137** — NetBIOS Name Service (UDP). Landed in `other` because it is a UDP port and this scanner is TCP only.
- 
 ---
  
 ## Notes
- 
 - Scanning all 65535 ports at `1.0s` timeout takes approximately 18 hours. At `0.1s`, scanning ports `1–1024` is manageable for testing.
 - Closed ports eat the full timeout before moving on. Open ports respond almost instantly.
