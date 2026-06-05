@@ -1,4 +1,5 @@
 import socket
+import os
 
 host_name = socket.gethostname()
 host_ip = socket.gethostbyname(host_name)
@@ -18,13 +19,18 @@ for port in range(1, 1025):
     if result == 0:
         open_ports.append(port)
         #print(f"{port}: Open")
-    elif result == 10035:
+    elif result in (10035, 10061):
         close_ports.append(port)
         #print(f"{port}: Close")
     else:
         other_ports.append(port)
         #print(f"{port}: {result}")
     sock.close()
-print(f"Open Ports: {open_ports}")
-print(f"Close Ports: {close_ports}")
-print(f"Other Ports: {other_ports}")
+    
+script_dir = os.path.dirname(os.path.abspath(__file__))
+output_path = os.path.join(script_dir, "scan_results.txt")
+
+with open(output_path, "w") as f:
+    f.write(f"Open Ports: {open_ports}\n")
+    f.write(f"Closed Ports: {close_ports}\n")
+    f.write(f"Other Ports: {other_ports}\n")
