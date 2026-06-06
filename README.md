@@ -5,12 +5,11 @@
 > This repository is actively maintained. Projects, scripts, and tools are updated over time as my skills improve.
 
 ## 📂 Repository Structure
-- 📁 `automation-scripts/` - Python scripts for network automation and security tasks.
-- 📁 `defensive-tools/` - Custom scripts built to analyze logs or test defenses.
+- 📁 `security-tools/` - Self-built security tools covering network, monitoring, forensics, and exploitation.
 - 📁 `lab-notes/` - Documentation, walkthroughs, and notes covering security concepts, tools, and hands-on labs.
 
 
 ## 🛠️ Skills & Technologies
 - **Languages:** Python
 - **Environments:** Windows, Linux (via VirtualBox)
-- **Focus Areas:** Network security, automation, scripting log analysis
+- **Focus Areas:** Network, Security, automation, scripting log analysis
