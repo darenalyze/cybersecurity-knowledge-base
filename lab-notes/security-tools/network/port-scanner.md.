@@ -15,7 +15,7 @@
 - 6/6/2026 - 10061 (WSAECONNREFUSED) added as a second closed condition. Unlike 10035 which is a timeout/no-response, this code means the target actively rejected the connection, which is closed state.
 - 6/6/2026 - The result of **Closed, Open and Other Ports** will be transferred in file instead of just printing the output in terminal.
 - 6/6/2026 - Restructured into its own folder. Renamed `port-scanner.py` to `main.py`.
-
+- 6/7/2026 - Moved port-scanner from automation-scripts to security-tools/network/
 ## Process
 - Researched how to detect port states using Python. The recommended tool was the `socket` library from Python's standard library.
 - Studied the official documentation and source before writing any code:
