@@ -67,14 +67,14 @@ END
 ## Errors Encountered
 
 ### Error 1 — Unexpected result codes from `connect_ex()`
-**Expected outputs:** `0` (open), `110` (filtered), `111` (closed)
-**Actual outputs:** `10035`, `10038`
-**Cause:** The expected codes `110` and `111` are Linux-only. Windows uses WSA error codes instead.
+> **Expected outputs:** `0` (open), `110` (filtered), `111` (closed)  
+**Actual outputs:** `10035`, `10038`  
+**Cause:** The expected codes `110` and `111` are Linux-only. Windows uses WSA error codes instead.  
 **Resolution:** Researched Windows-specific codes. Mapped `10035` as closed (still trying / no answer) and `10038` as a socket state issue caused by reusing a closed socket. Fixed by creating a new socket for each port inside the loop.
 ---
  
 ### Error 2 — Port `137` appearing in `other` list
-**Cause:** Port `137` is a **UDP port** (NetBIOS Name Service). The scanner uses `SOCK_STREAM` which is TCP only. TCP cannot properly connect to a UDP port, so it returns an unrecognized code instead of `0` or `10035`.
+> **Cause:** Port `137` is a **UDP port** (NetBIOS Name Service). The scanner uses `SOCK_STREAM` which is TCP only. TCP cannot properly connect to a UDP port, so it returns an unrecognized code instead of `0` or `10035`.  
 **Resolution:** Logged it in the `other` list. A full scanner would require a separate `SOCK_DGRAM` socket to scan UDP ports.
 ---
  
