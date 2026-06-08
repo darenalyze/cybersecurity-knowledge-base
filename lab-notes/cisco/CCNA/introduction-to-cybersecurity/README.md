@@ -18,6 +18,6 @@
 |---|-------|--------|
 | 2.1 | Analyzing a Cyber Attack | ✅ |
 | 2.2 | Methods of Infiltration |✅|
-| 2.3 | Security Vulnerability and Exploits |🔄| 
-| 2.4 | The Cybersecurity Landscape |⬜|
+| 2.3 | Security Vulnerability and Exploits |✅| 
+| 2.4 | The Cybersecurity Landscape |🔄|
 
