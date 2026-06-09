@@ -27,15 +27,15 @@
 
 ## Errors Encountered
 - Error 1 Pylance(reportMissingModuleSource)
-> **Cause:** I thought "pynput" is in python standard library so I imported the "pynput" module that does not yet downloaded
+> **Cause:** I thought "pynput" is in python standard library so I imported the "pynput" module that does not yet downloaded  
 > **Resolution:** I install the module using integrated terminal in vsCode and i typed "python -m pip install pynput"
 
 - Error 2 TypeError: unsupported operand type(s) for +: 'NoneType' and 'str'
-> **Cause:** Adding up the NoneType and StringType. 
+> **Cause:** Adding up the NoneType and StringType.   
 > **Resolution:** Adding Exception Handling try and except.
 
 - Error 3 UnboundLocalError: cannot access local variable 'result' where it is not associated with a value
-> **Cause:** Try to use the variable before it's defined `result = result+key`
+> **Cause:** Try to use the variable before it's defined `result = result+key`  
 > **Resolution:** I initialized `result` as an empty string and simplified the logic to concatenate all keys in the list.
 
 ## Notes
