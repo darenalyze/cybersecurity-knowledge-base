@@ -77,7 +77,7 @@ Error 1 `ipconfig`
         command 'hipconfig' from deb hipcc
       Try: sudo apt install <deb name>
 ---
-**Cause:** I got used to typing `ipconfig` from Windows CMD, but the correct command on Linux is `ifconfig`.
+**Cause:** I got used to typing `ipconfig` from Windows CMD, but the correct command on Linux is `ifconfig`.  
 **Resolution:** Noticing the "f" instead of "p" led me to try ifconfig, which gave the expected result. (Fixed)
 
 ## Practice Checklist
