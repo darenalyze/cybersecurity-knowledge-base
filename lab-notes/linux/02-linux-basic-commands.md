@@ -69,7 +69,7 @@ a folder controls who can enter it.
 - I like how curl works. I can now look at page i want to visit without leaving at my terminal by asking their server to send me a copy of their page.
 
 ## ❌ Errors Encountered:
-Error 1
+Error 1 `ipconfig`
 ---
     Command 'ipconfig' not found, did you mean:
         command 'iwconfig' from deb wireless-tools
@@ -77,9 +77,8 @@ Error 1
         command 'hipconfig' from deb hipcc
       Try: sudo apt install <deb name>
 ---
-
-## ✅ Resolution:
-1. By reading the error carefully there is a line said `command 'ifconfig' from deb net-tools` by just checking the command name carefully, you will see it is a **"f"** instead of **"p"** trying this commands it gave me expected result (✅Fixed error 1)
+**Cause:** I got used to typing `ipconfig` from Windows CMD, but the correct command on Linux is `ifconfig`.
+**Resolution:** Noticing the "f" instead of "p" led me to try ifconfig, which gave the expected result. (Fixed)
 
 ## Practice Checklist
 - [x] Navigate the file system using only the terminal
