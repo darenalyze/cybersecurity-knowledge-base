@@ -6,3 +6,4 @@ scan_results.txt
 __pycache__/
 *.pyc
 .env
+test.py
