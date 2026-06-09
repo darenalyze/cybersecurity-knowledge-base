@@ -1,1 +1,8 @@
+# Output files
+keylog.txt
+scan_results.txt
+
+# Python
 __pycache__/
+*.pyc
+.env
