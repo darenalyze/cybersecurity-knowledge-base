@@ -15,6 +15,11 @@
     - `key.backspace` to `/(backspace)`
     - `key.space` to `" "`
   - Backspace key added to special key list
+  
+- **6/11/2026**
+  - Fixed scrambled letter order when typing fast
+    - Root cause: logging on `on_release` instead of `on_press` overlapping key releases during fast input caused incorrect buffer order
+    - Fix: moved all capture logic to `on_press`, `on_release` is now empty
 
 ## Process
 - I searched what library I will use at this one and i found out that `pynput` is perfect for this one.
