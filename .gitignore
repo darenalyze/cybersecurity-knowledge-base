@@ -2,6 +2,9 @@
 keylog.txt
 scan_results.txt
 
+#Test
+test.py
+
 # Python
 __pycache__/
 *.pyc
