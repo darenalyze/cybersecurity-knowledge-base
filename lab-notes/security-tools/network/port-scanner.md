@@ -7,15 +7,30 @@
 ## Goal
 - [x] Accept target IP as input
 - [x] Scan ports from 1 to 1024
+- [x] Scan ports full range (1 to 65,535)
 - [x] Detect open ports
 - [x] Detect closed ports
 - [x] Export results to a file
+
 ---
 ## New Features
-- 6/6/2026 - 10061 (WSAECONNREFUSED) added as a second closed condition. Unlike 10035 which is a timeout/no-response, this code means the target actively rejected the connection, which is closed state.
-- 6/6/2026 - The result of **Closed, Open and Other Ports** will be transferred in file instead of just printing the output in terminal.
-- 6/6/2026 - Restructured into its own folder. Renamed `port-scanner.py` to `main.py`.
-- 6/7/2026 - Moved port-scanner from automation-scripts to security-tools/network/
+- 6/6/2026 
+  - 10061 (WSAECONNREFUSED) added as a second closed condition. Unlike 10035 which is a timeout/no-response, this code means the target actively rejected the connection, which is closed state.
+- 6/6/2026 
+  - The result of **Closed, Open and Other Ports** will be transferred in file instead of just printing the output in terminal.
+- 6/6/2026 
+  - Restructured into its own folder. Renamed `port-scanner.py` to `main.py`.
+- 6/7/2026 
+  - Moved port-scanner from automation-scripts to security-tools/network/
+- 6/11/2026
+  - Improved performance using threading
+    - Replaced sequential loop with `ThreadPoolExecutor(max_workers=1000)` from `concurrent.futures`
+    - Added `threading.Lock()` to prevent race conditions when multiple threads append to the same list simultaneously
+    - Added `import threading` required separately even when using `ThreadPoolExecutor`
+    - Expanded scan range from 1–1024 to 1–65535
+    - Removed `other_ports` list — reduces unnecessary locking across 65535 ports
+  - Benchmark result: 1–65535 scanned in ~6 seconds (~1000x faster than original sequential scan)
+
 ## Process
 - Researched how to detect port states using Python. The recommended tool was the `socket` library from Python's standard library.
 - Studied the official documentation and source before writing any code:
@@ -27,20 +42,23 @@
 - The use of `connect_ex()` instead of using `connect()` is because `connect_ex()` returns integer error codes instead of raising exceptions, making it cleaner to handle inside a loop without try/except.
 - Setting the timeout to `(1)` is kinda slow for me so I decided to switch to 0.1. I think that is still good because port is fast at responding when Open.
 - I use terminal for an output in the meantime because it is more convenient and easy to debug something.
+- Replaced sequential loop with `ThreadPoolExecutor` to scan ports concurrently. Used `threading.Lock()` to prevent race conditions when multiple threads write to the same list. Removed `other_ports` list to reduce unnecessary locking across 65535 ports.
 
 ### Step-by-Step Logic
- ```
+```
 START
     resolve hostname to target IP
-    scan each port from 1 to 1024
+    spawn 1000 threads via ThreadPoolExecutor
+    each thread scans one port:
         create a new TCP socket
-        set timeout to 0.1 seconds
+        set timeout to 0.05 seconds
         attempt connection via connect_ex()
-        if result == 0       → port is OPEN
-        if result == 10035   → port is CLOSED (Windows: would block / timed out)
-        else                 → port is OTHER (log the error code)
+        acquire lock
+            if result == 0             → port is OPEN
+            if result in (10035,10061) → port is CLOSED
+        release lock
         close socket
-    print open, closed, and other port lists
+    write sorted open and closed port lists to file
 END
 ```
 ---
@@ -76,25 +94,6 @@ END
 ### Error 2 — Port `137` appearing in `other` list
 > **Cause:** Port `137` is a **UDP port** (NetBIOS Name Service). The scanner uses `SOCK_STREAM` which is TCP only. TCP cannot properly connect to a UDP port, so it returns an unrecognized code instead of `0` or `10035`.  
 **Resolution:** Logged it in the `other` list. A full scanner would require a separate `SOCK_DGRAM` socket to scan UDP ports.
----
  
-## Scan Results (localhost)
-**Target:** `127.0.0.1` (localhost)
-**Range:** Ports `1–1024`
-**Timeout:** `0.1s` per port
- 
-| Status | Ports |
-|--------|-------|
-| ✅ Open | `135`, `139`, `445` |
-| ⚠️ Other | `137` |
-| ❌ Closed | All remaining ports |
- 
-> **Port 135** — RPC (Remote Procedure Call), standard Windows system port.
-> **Port 139** — NetBIOS Session Service, used for Windows file and printer sharing.
-> **Port 445** — SMB (Server Message Block), Windows file sharing protocol.
-> **Port 137** — NetBIOS Name Service (UDP). Landed in `other` because it is a UDP port and this scanner is TCP only.
----
- 
-## Notes
-- Scanning all 65535 ports at `1.0s` timeout takes approximately 18 hours. At `0.1s`, scanning ports `1–1024` is manageable for testing.
-- Closed ports eat the full timeout before moving on. Open ports respond almost instantly.
+
+
