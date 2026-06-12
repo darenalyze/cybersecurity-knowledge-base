@@ -1,3 +1,7 @@
+# TryHackMe
+> This is my TryHackMe Profile [Link](https://tryhackme.com/p/johndarenbutiong?tab=yearly-activity)  
+> Status: Active  
+> Free Tier 
 # 📋 Progress Tracker
 
 ## 📌 Legends
@@ -6,10 +10,10 @@
 - ⬜ Not Started
 ---
 
-## 📘 Offensive Security Intro
-| Task # | Topic | Status |
+## 📘 Start Your Cyber Security Journey (Module 1)
+| Order # | Topic | Status |
 |---|-------|--------|
-| 1 | What is Offensive Security? |✅|
-| 2 | Hacking your first machine |✅| 
-| 3 | Careers in cyber security |⬜|
+| 1 | Offensive Security Intro |✅|
+| 2 | Defensive Security Intro |🔄| 
+| 3 | Search Skills |⬜| 
 
