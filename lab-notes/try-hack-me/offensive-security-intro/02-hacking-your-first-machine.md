@@ -2,10 +2,10 @@
 ---
 
 ## My Understanding
-- This is my first Lab Machines that i'm going to hack.  
-- They prepare a fake banking system called "FakeBank" that safely to hack.  
-- My web screen split into two, one is for information and guide (left side), the other one is the lab machine showing web browser fire fox that in http://fakebank.thm/ site (right side)   
-- There is three usefull file aplication i see which is firefox, terminal and wordlis.txt that have 7999 lines of word text also i see that machine lab using ubuntu os
+- This is my first Lab Machine that I'm going to hack. 
+- They provide a fake banking system called "FakeBank" that is safe to hack.
+- My web screen is split into two, one is for information and a guide (left side), the other is the lab machine showing the web browser Firefox at http://fakebank.thm/ (right side)  
+- There are three useful file applications I can see: Firefox, a terminal, and wordlist.txt which has 7,999 lines of words. I can also see that the lab machine is running Ubuntu OS.
 
     ## Given Information:
     - Target IP Address: 10.49.137.40
@@ -41,9 +41,9 @@
         2026/06/11 19:38:58 Finished
         =====================================================
 
-    - I learned that this terminal code is have a power to loop through the given texts and try it in given website. They finding a hidden directories and pages
-    - We can see in result that `/bank-transfer (Status: 200)` have status of 200 which means it is exist and loaded succefully (did not tell in)
-    - I quickly added the `/bank-transfer` because the **Gobuster** says it is exist. So i went there to see the page and i saw: 
+    - I learned that this command has the ability to loop through the given text and try each entry on the given website. It finds hidden directories and pages.
+    - We can see in the result that `/bank-transfer (Status: 200)` has a status of 200, which means it exists and loaded successfully.
+    - I quickly navigated to /bank-transfer because **Gobuster** says it exists. So I went there to see the page and I saw:
     --- 
         Staff Account
         Transfer money between accounts
@@ -56,7 +56,7 @@
 
     ## Mission 
     > "Your mission is to transfer $2000 from bank account 2276 to your account (account number 8881). If your transfer was successful, you should now be able to see your new balance reflected on your account page."
-    - I Put $2000 in `Amount to send in USD input`, 2276 to `Send from` and 8881 to `Send to` and finally I clicked `Send Money` after double checking of inputed details
+    -  I put $2000 in the Amount to send in USDfield, 2276 inSend from, and 8881 in Send to, then clicked Send Money after double-checking the entered details.
     #### Result:
     ---
         Success, transfer completed
@@ -72,14 +72,14 @@
         Date of transfer:
         2026-06-11 
         
-    - I click `Return to Your Account` and This text pop up :
+    - I clicked Return to Your Account and this text popped up:
     --- 
         Congratulations - you hacked the bank!
         The answer to the TryHackMe question is BANK-HACKED
 
 ### Question 
 1. Above your account balance, you should now see a message indicating the answer to this question. Can you find the answer you need?
-> My answer: BANK-HACKED
+> My answer: BANK-HACKED  
 > Result: Correct
 
 
