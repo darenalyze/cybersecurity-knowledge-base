@@ -47,3 +47,11 @@
   Some of the main areas of interest for a SOC are:
   - Vulnerabilities: Whenever a system vulnerability (weakness) is discovered, it is essential to fix it by installing a proper update or patch. When a fix is unavailable, the necessary measures should be taken to prevent an attacker from exploiting it. Although remediating vulnerabilities is vital to a SOC, it is not necessarily assigned to them.
   - Policy violations: A security policy is a set of rules required to protect the network and systems. For example, it might be a policy violation if users upload confidential company data to an online storage service.
+  - Unauthorized activity: Consider the case where a user’s login name and password are stolen, and the attacker uses them to log into the network. A SOC must detect and block such an event as soon as possible before further damage is done.
+  
+  Security operations cover various tasks to ensure protection, one such task is threat intelligence.
+
+  ### Threat Intelligence
+  In this context, intelligence refers to information you gather about actual and potential enemies. A threat is any action that can disrupt or harmful affect a system. Threat intelligence collects information to help the company better prepare against potential adversaries. 
+
+ 
