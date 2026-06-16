@@ -45,26 +45,40 @@ systemd (PID 1)        ← root of all processes
 | Zombie | `Z` | Finished but not cleaned up |
 ---
 ## Notes & Observations
-- PID stand for process id. every process in device is have a unique own pid
-- It is interesting to know that some process is have "Parent" and "Child" process
-- Foreground is a process that the user is actively interacting with. I just know that it is called "Foreground" because I only know before is "Background" which is the process running in background, means you will not get interrupt because this is running in background.
-- Proccess is not always means running, there is some types of process and this is where the state process will enter. there is 4 types of process which is, running, stop, zombie and sleeping.
-- `ps` allows me to peak at snapshot process center where the current processes live
-- if the `ps` only allow me to see the snapshot, the `top` allowing me to see the real-time process.
-- You can't use the `htop` right away, when you tried to run the command without installing it first, the terminal will ask you to install it first.
-- i really want to try the `bg` and `fg` but idk where to use it, so i try to use `jobs` but nothing showing so, to see if jobs actually working i try to put `sleep 500 &` this means put the terminal into sleep in 500 sec and imediately push it into background. Then i tried to put it in **foreground** using `fg %1` because "1" is the job ID of `sleep 500 $` then my terminal pauses means we puted the job into foreground successfully. I manage to get out of the pause by pressing the **"Ctrl + C"** key also i tried to just quit in current terminal then re-open it and it works too.
-
+- PID stands for Process ID. Every process on a device has its own unique PID.
+- It is interesting to know that some processes have a "Parent" and "Child" relationship.
+- Foreground is a process that the user is actively interacting with. I just learned it's called "Foreground" — before this, I only knew "Background," which is a process running behind the scenes, meaning it won't interrupt you.
+- A process is not always running. There are types of states a process can be in — 4 to be exact: Running, Stopped, Zombie, and Sleeping.
+- `ps` allows me to peek at a snapshot of where the current processes live.
+- If `ps` only lets me see a snapshot, `top` lets me see processes in real-time.
+- You can't use `htop` right away — when you try to run the command without installing it first, the terminal will prompt you to install it.
+- I really wanted to try `bg` and `fg` but didn't know where to start, so I tried `jobs` first — but nothing showed up. To verify it actually works, I ran `sleep 500 &`, which puts the terminal to sleep for 500 seconds and immediately pushes it to the background. Then I brought it to the foreground using `fg %1`, since "1" is the job ID of `sleep 500 &`. My terminal paused, which confirmed the job moved to the foreground successfully. I got out of the pause by pressing **Ctrl + C.** I also tried just closing the terminal and reopening it — that worked too.
+- When I used `nice` on a running program, it threw [Error 1](#error-1). I realized you can only use `nice` on a process that doesn't exist yet. The command I was looking for is `renice`, which lets you modify the niceness of an already-running process. `renice` expects a PID, so when I passed the process name instead, it threw [Error 2](#error-2).
+- I prefer `killall` over `kill` — `kill` requires the PID and only targets that specific 
+process, which can leave child processes running or even cause them to respawn.
 ---
 ## ❌ Errors Encountered
+### Error 1
+
+```
+    nice: cannot set niceness: Permission denied
+    nice: ‘18700’: No such file or directory
+```
+> Cause: The program expects a name, not a PID, and requires root/administrative access.  
+> Resolution: Used the real name of the program and used `sudo` (fixed).
+
+### Error 2
  
+```
+    renice: bad process ID value: brave
+```
+> Cause: renice expects a PID — I assumed it took the same input as nice.  
+> Resolution: I run `top` to see existing process PID runnign and used that instead of name of the process(fixed).
 ---
-## ✅ Resolution
- 
----
+
 ## Practice Checklist
-- [ ] List all running processes using `ps aux`
-- [ ] Monitor live processes using `top` or `htop`
-- [ ] Kill a process using `kill` and `killall`
-- [ ] Run a process in the background using `bg`
-- [ ] Bring a background process to the foreground using `fg`
-- [ ] Identify suspicious or unknown processes
+- [x] List all running processes using `ps aux`
+- [x] Monitor live processes using `top` or `htop`
+- [x] Kill a process using `kill` and `killall`
+- [x] Run a process in the background using `bg`
+- [x] Bring a background process to the foreground using `fg`
