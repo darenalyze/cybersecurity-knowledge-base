@@ -48,10 +48,12 @@ systemd (PID 1)        ← root of all processes
 - PID stand for process id. every process in device is have a unique own pid
 - It is interesting to know that some process is have "Parent" and "Child" process
 - Foreground is a process that the user is actively interacting with. I just know that it is called "Foreground" because I only know before is "Background" which is the process running in background, means you will not get interrupt because this is running in background.
-- Proccess is not always means running, there is some types of process and this is where the state process will enter. there is 4 types of process which is, running, stop, zombie ands leeping.
+- Proccess is not always means running, there is some types of process and this is where the state process will enter. there is 4 types of process which is, running, stop, zombie and sleeping.
 - `ps` allows me to peak at snapshot process center where the current processes live
 - if the `ps` only allow me to see the snapshot, the `top` allowing me to see the real-time process.
-- 
+- You can't use the `htop` right away, when you tried to run the command without installing it first, the terminal will ask you to install it first.
+- i really want to try the `bg` and `fg` but idk where to use it, so i try to use `jobs` but nothing showing so, to see if jobs actually working i try to put `sleep 500 &` this means put the terminal into sleep in 500 sec and imediately push it into background. Then i tried to put it in **foreground** using `fg %1` because "1" is the job ID of `sleep 500 $` then my terminal pauses means we puted the job into foreground successfully. I manage to get out of the pause by pressing the **"Ctrl + C"** key also i tried to just quit in current terminal then re-open it and it works too.
+
 ---
 ## ❌ Errors Encountered
  
