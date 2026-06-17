@@ -57,7 +57,7 @@ systemd (PID 1)        ← root of all processes
 - I prefer `killall` over `kill` — `kill` requires the PID and only targets that specific 
 process, which can leave child processes running or even cause them to respawn.
 ---
-## ❌ Errors Encountered
+## Errors Encountered
 ### Error 1
 
 ```

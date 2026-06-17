@@ -26,14 +26,14 @@ for cybersecurity practice and future labs.
 > **Resolution**: Booted into the motherboard BIOS and enabled **Virtualization (SVM Mode)**. (Fixed initial setup error)
 
 - Error 2 Realtek PCIe GbE Family Controller (adapter 1) (4:49 am 5/21/2026)
-> **Cause:** Changing CPU Hardware
+> **Cause:** Changing CPU Hardware  
 > **Resolution:**  
 > - Open VirtualBox VM **Settings** -> **Network** -> **Adapter 1**.
 > - Under **Name**, changed the dropdown selection from the old network controller to the new hardware interface (`Realtek PCIe GbE Family Controller #2`).
 > - Clicked **OK** to save and successfully booted the VM. (Fixed 4: 55 am 5/21/2026)
 
 - Error 3 Black screen after boot (6/10/2026)
-> **Cause:** Corrupted file in graphical interface side I think. because there is poping text of error graphics even tho i already restarted the pc and the GPU is perfectly working. Because what I remember I shutdown the pc while there is a active proccess and while the VM shutting down (that was the possible culprit i can think off) 
+> **Cause:** Corrupted file in graphical interface side I think. because there is poping text of error graphics even tho i already restarted the pc and the GPU is perfectly working. Because what I remember I shutdown the pc while there is a active proccess and while the VM shutting down (that was the possible culprit i can think off)  
 **Resolution:**  
    - Waited about 5mins (failed)
    - Switching to Terminal:

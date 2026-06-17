@@ -38,38 +38,47 @@
 ## Notes & Observations
 - I often use `whoami` because I always check if I am on the right user. This will be useful when you have 2 or more users on one computer (I am planning to create 2 users — one for attack, one for defense).
 - For me `who` is perfect for checking currently logged-in users.
-- `attacker is not in the sudoers file.` — having this error means I can't add a user or create a user by default for a newly created user, even with sudo, because the attacker is not in the sudoers group.
+- [error2](#error-2) — having this error means I can't add a user or create a user by default for a newly created user, even with sudo, because the attacker is not in the sudoers group.
 - Running `sudo -l` I realize that there is a limit in sudo and it depends on your permission.
 - I often use `cat /etc/passwd` to check the users I created and delete some that I am not using anymore using `sudo deluser [username]`.
-- `su` is one of the most useful commands when you have many user accounts on one PC, since it lets you switch users easily without needing to restart your PC completely.
-- Running `cat /etc/shadow` gave me unexpected output `cat: /etc/shadow: Permission denied` I think because `/etc/shadow` is restricted to root only by its file permissions, so regular users cannot read it.
+- `su` it lets you switch users easily without needing to restart your PC completely.
+- Running `cat /etc/shadow` gave me unexpected output [error4](#error-4) I think because `/etc/shadow` is restricted to root only by its file permissions, so regular users cannot read it.
+- I learned that all files and folders in the root directory require `sudo` to bypass 
+basic permissions and perform actions there.
 ---
-## ❌ Errors Encountered
-**Error 1**
----
+## Errors Encountered
+### Error 1
+```
     Fatal: Only root may add a user or group to the system.
----
-**Error 2**
----
+```
+> Cause: Only root may add a user or group to the system.
+> Resolution: Used `sudo` before the command to run it as root. (fixed)
+
+### Error 2
+```
     attacker is not in the sudoers file.
        |
     (username)
----
-**Error 3**
----
+```
+> Cause: Attacker user is not in the sudoers group
+> Resolution: Added the user to the `sudo` group using `sudo usermod -aG sudo (username)` to grant sudo privileges. (fixed)
+
+### Error 3
+```
     su: Authentication failure
----
-**Error 4**
----
+```
+> Cause: Just a wrong input password.
+> Resolution: Used `sudo` before the command to run it as root. (fixed)
+### Error 4
+```
     cat: /etc/shadow: Permission denied
----
-## ✅ Resolution
-1. **Fatal error** — Used `sudo` before the command to run it as root. (✅ fixed)
-2. **Sudoers error** — Added the user to the `sudo` group using `sudo usermod -aG sudo (username)` to grant sudo privileges. (✅ fixed)
-3. **Authentication Failed**  
-   — Used `sudo` (❌ failed)  
-   — Just a wrong input password. I typed carefully the right password. (✅ fixed)
-4. **Permission denied** — Used `sudo` before the command to run it as root. (✅ fixed)
+```
+
+> Cause: The file or folder is restricted and requires higher-level permissions.
+> Resolution: Run `sudo` before the command.
+
+## Resolution
+
 ## Practice Checklist
 - [x] Check your current user and ID
 - [x] Create a new user and set a password

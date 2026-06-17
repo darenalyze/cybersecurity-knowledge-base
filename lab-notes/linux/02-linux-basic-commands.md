@@ -58,7 +58,7 @@
 - Commands like `ls`, `touch`, and `mkdir` accept multiple arguments,
 so you can run them on several targets at once without repeating the command.
 (e.g., `touch file1 file2 file3`, `mkdir folder1 folder2 folder3`)
-- I want to ping my **IP address** but instead I got an Error `Command 'ipconfig' not found`. I was confused at the commands at first. It looks like `ipconfig` (from Windows command). I looked carefully at the command in linux and it's actually `ifconfig` (I put **"p"** instead of **"f"**)
+- I want to ping my **IP address** but instead I got an Error [error1](#error-1). I was confused at the commands at first. It looks like `ipconfig` (from Windows command). I looked carefully at the command in linux and it's actually `ifconfig` (I put **"p"** instead of **"f"**)
 - I expected using `touch` command on an existing file will create an error but surprisingly it only updates the file's access and modification timestamps.
 - I learned that terminal in Linux is case-sensitive unlike Windows terminal.
 - The execute (`x`) permission on a plain text file makes no sense since
@@ -68,8 +68,8 @@ a folder controls who can enter it.
 - I prefer using `ss` over `netstat`. `ss` is much cleaner to read (for me).
 - I like how curl works. I can now look at page i want to visit without leaving at my terminal by asking their server to send me a copy of their page.
 
-## ❌ Errors Encountered:
-Error 1 `ipconfig`
+## Errors Encountered:
+### Error 1
 ---
     Command 'ipconfig' not found, did you mean:
         command 'iwconfig' from deb wireless-tools
