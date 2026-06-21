@@ -5,7 +5,7 @@
 - Task 2 - Hacking your first machine
 - Task 3 - Careers in cyber security
 
-## My Understanding
+## Notes
 - **Task 1 - What is Offensive Security?**
   - 
     "To outsmart a hacker, you need to think like one."
