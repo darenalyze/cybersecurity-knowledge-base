@@ -1,7 +1,7 @@
 # TryHackMe
 > This is my TryHackMe Profile [Link](https://tryhackme.com/p/johndarenbutiong?tab=yearly-activity)  
-> Status: Active  
-> Free Tier 
+> Status: Active 
+> Free Tier (Currently)
 # 📋 Progress Tracker
 
 ## 📌 Legends
