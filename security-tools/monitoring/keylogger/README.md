@@ -1,47 +1,56 @@
 # Keylogger
 
-## Goal
-- [x] Still works with other program
-- [ ] Process hidden
-- [x] Live output will pass on file
-- [ ] All proper keys detection 
-- [ ] Mouse position detection
-- [ ] Time and date when the key is detected
+A Python-based keystroke monitoring tool designed to capture and log inputs locally for endpoint security auditing and monitoring analysis.
 
-## Updates
-- **6/7/2026:**
-  - New style at keylog.txt and improved readability of output
-    - `key.enter` to `/(enter)`
-    - `key.backspace` to `/(backspace)`
-    - `key.space` to `" "`
-  - Backspace key added to special key list
-  
-- **6/11/2026**
-  - Fixed scrambled letter order when typing fast
-    - Root cause: logging on `on_release` instead of `on_press` overlapping key releases during fast input caused incorrect buffer order
-    - Fix: moved all capture logic to `on_press`, `on_release` is now empty
+## Features & Configuration
+The script looks for a `config.json` file in the same directory. You can customize the following parameters:
 
-## Process
-- I searched what library I will use at this one and i found out that `pynput` is perfect for this one.
-- Source of how to use this `pynput` library: https://pypi.org/project/pynput/
-- Also I use `os` library to know where the result or live input of the file will be as default
-- The press recording logic works like this:
-  - all letters input will append in one list and if one of these key is pressed, the list will be uploaded in file:
-    - Windows key, Space key, Enter key, Esc key
-  - I decided to use this to reduce lag spike per key so it can capture every key accurately and support low-end systems
+* `output_directory`: The path where the log file will be saved. If left blank (`""`), it defaults to the directory where `main.py` is located.
+* `filename`: The name of the generated log file.
+* `flush_on_delimiter`: Buffers inputs and writes to the file only when a delimiter key is pressed.
+* `new_line_per_delimiter`: Starts a fresh line in the log file after every delimiter.
+* `stealth_mode`: *Planned feature (currently unavailable).*
 
-## Errors Encountered
-- Error 1 Pylance(reportMissingModuleSource)
-> **Cause:** I thought "pynput" is in python standard library so I imported the "pynput" module that does not yet downloaded  
-> **Resolution:** I install the module using integrated terminal in vsCode and i typed "python -m pip install pynput"
+### Key Sanitization Mapping
+To ensure the log file remains clean and highly readable, special keys are dynamically captured and mapped to explicit text tags:
 
-- Error 2 TypeError: unsupported operand type(s) for +: 'NoneType' and 'str'
-> **Cause:** Adding up the NoneType and StringType.   
-> **Resolution:** Adding Exception Handling try and except.
+| Key | Log Output |
+| :--- | :--- |
+| `Enter` | `\n` (Actual Newline) |
+| `Space` | `" "` (Spacebar) |
+| `Backspace` | ` [BACKSPACE] ` |
+| `Tab` | ` [TAB] ` |
+| `Caps Lock` | ` [CAPS_LOCK] ` |
+| `Shift (Left/Right)` | ` [SHIFT] ` |
+| `Ctrl (Left/Right)` | ` [CTRL] ` |
+| `Alt / AltGr` | ` [ALT] ` |
+| `Delete` | ` [DELETE] ` |
+| `Escape` | ` [ESC] ` |
 
-- Error 3 UnboundLocalError: cannot access local variable 'result' where it is not associated with a value
-> **Cause:** Try to use the variable before it's defined `result = result+key`  
-> **Resolution:** I initialized `result` as an empty string and simplified the logic to concatenate all keys in the list.
+---
 
-## Notes
-- It is nice to know that in python adding the NoneType to StringType will return error. I expect it will return only the string 
+## Installation & Usage
+
+1. **Install dependencies:**
+   ```bash
+   pip install pynput
+2. **Run the script:**
+   ```bash
+   python main.py
+
+## Update Changelog
+- 6/26/2026 — Configuration & Formatting Overhaul
+  - 
+    - Added `config.json` file support for dynamic settings management (paths, naming, delimiter flushing, and layout options).
+    - Replaced inline string formatting checks with an optimized dictionary mapping layout.
+    - Cleaned up log representations for special modifiers (`Ctrl`, `Alt`, `Shift`, `Tab`, `Caps Lock`, etc.) to keep logs looking uniform and organized.
+
+- 6/11/2026 — Race Condition Fix
+  - 
+    - **Issue:** Characters and phrases occasionally became scrambled or printed out of sequence during rapid typing.
+    - **Root Cause:** Input logs were bound to the asynchronous `on_release` listener event. Rapid typing overlapping caused thread blocks to record actions out of order.
+    - **Resolution:** Migrated character tracking entirely to the synchronous `on_press` event handler; deprecated `on_release`logic.
+
+- 6/07/2026 — Basic Key Sanitization
+  - 
+    - Initial implementation of raw string scrubbing for basic keys (Enter, Backspace, Space) to improve general analytical output in keylog.txt.
