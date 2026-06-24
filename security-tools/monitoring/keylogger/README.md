@@ -37,7 +37,6 @@ To ensure the log file remains clean and highly readable, special keys are dynam
 2. **Run the script:**
    ```bash
    python main.py
-
 ## Update Changelog
 - 6/26/2026 — Configuration & Formatting Overhaul
   - 
