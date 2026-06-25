@@ -2,15 +2,16 @@
 > This is my TryHackMe Profile [Link](https://tryhackme.com/p/johndarenbutiong?tab=yearly-activity)  
 > Status: Active 
 > Free Tier (Currently)
-# 📋 Progress Tracker
 
-## 📌 Legends
+## 📋 Progress Tracker
+
+### 📌 Legends
 - ✅ Done
 - 🔄 On going
 - ⬜ Not Started
----
 
-## 📘 Start Your Cyber Security Journey (Module 1)
+
+### 📘 Start Your Cyber Security Journey (Module 1)
 | Order # | Topic | Status |
 |---|-------|--------|
 | 1 | Offensive Security Intro |✅|

@@ -1,9 +1,11 @@
-# 📋 Progress Tracker
-## 📌 Legends
+# 🛡️ Introduction to Cybersecurity
+
+## 📋 Progress Tracker
+### 📌 Legends
 - ✅ Done
 - 🔄 On going
 - ⬜ Not Started
----
+
 ### 📘 Module 1: Introduction to Cybersecurity
 | # | Topic | Status |
 |---|-------|--------|
@@ -25,7 +27,7 @@
 | # | Topic | Status |
 |---|-------|--------|
 | 3.1 | Protecting Your Devices and Network|⬜|
-| 3.2 | Data Maintenace|⬜|
+| 3.2 | Data Maintenance|⬜|
 | 3.3 | Who Owns Your Data?|⬜|
 | 3.4 | Safeguarding Your Onlline Privacy|⬜|
 | 3.5 | Discover Your Own Risky Online Behavior|⬜|
