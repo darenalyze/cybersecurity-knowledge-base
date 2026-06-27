@@ -9,7 +9,7 @@
 ## My Understanding 
 
 ### Task 1 - Introduction to Defensive Security
-  > In the previous lesson, we learned about offensive security. In this lesson, we will examine its counterpart, defensive security. It is concerned with two main tasks:
+  In the previous lesson, we learned about offensive security. In this lesson, we will examine its counterpart, defensive security. It is concerned with two main tasks:
   1. Preventing intrusions from occurring
   2. Detecting intrusions when they occur and responding properly
 
