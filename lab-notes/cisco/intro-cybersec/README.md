@@ -1,4 +1,12 @@
 # 🛡️ Introduction to Cybersecurity
+> Discover the fundamentals of protecting networks, devices, and data from cyber threats.
+- Free
+- 6 Hours
+- Beginner
+- 7 Labs
+- Self-paced
+
+*I took this course to build a strong security mindset and understand how to defend digital assets.*
 
 ## 📋 Progress Tracker
 ### 📌 Legends
@@ -6,28 +14,13 @@
 - 🔄 On going
 - ⬜ Not Started
 
-### 📘 Module 1: Introduction to Cybersecurity
-| # | Topic | Status |
-|---|-------|--------|
-| 1.1 |  The World of Cybersecurity |✅|
-| 1.2 | Organizational Data | ✅ |
-| 1.3 | What Was Taken? | ✅ |
-| 1.4 | Cyber Attackers | ✅ |
-| 1.5 | Cyberwarfare | ✅ |
+|#| <center> Module <center> |Status|
+|:--:|:--|:--:|
+|1| Introduction to Cybersecurity |✅|
+|2| Attacks, Concepts and Techniques |🔄|
+|3| Protecting your Data and Privacy |⬜|
+|4| Protecting the Organization |⬜|
+|5| Will Your Future Be in Cybersecurity? |⬜|
+|📝| **End of Course Survey** |⬜|
+|📝| **Introduction to Cybersecurity: Course Final Exam** |⬜|
 
-### 📘 Module 2: Attacks, Concepts and Techniques
-| # | Topic | Status |
-|---|-------|--------|
-| 2.1 | Analyzing a Cyber Attack | ✅ |
-| 2.2 | Methods of Infiltration |✅|
-| 2.3 | Security Vulnerability and Exploits |✅| 
-| 2.4 | The Cybersecurity Landscape |✅|
-
-### 📘 Module 3: Protecting your Data and Privacy
-| # | Topic | Status |
-|---|-------|--------|
-| 3.1 | Protecting Your Devices and Network|⬜|
-| 3.2 | Data Maintenance|⬜|
-| 3.3 | Who Owns Your Data?|⬜|
-| 3.4 | Safeguarding Your Onlline Privacy|⬜|
-| 3.5 | Discover Your Own Risky Online Behavior|⬜|
