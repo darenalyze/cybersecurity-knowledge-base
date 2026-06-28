@@ -14,5 +14,4 @@
 - **Networking:** TCP/IP, ports, protocols, socket programming
 - **Tools:** VirtualBox
 - **Environments:** Windows, Linux
-- **Currently studying:** CCNA (Cisco Networking Academy)
 - **Focus Areas:** Network security, scripting, log analysis
