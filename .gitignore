@@ -1,12 +1,5 @@
-# Output files
-keylog.txt
-scan_results.txt
-
-#Test
-test.py
-
-# Python
-__pycache__/
-*.pyc
-.env
-test.py
+# Linux temporary files
+*~
+.fuse_hidden*
+.directory
+.Trash-*
