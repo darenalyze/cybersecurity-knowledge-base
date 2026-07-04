@@ -17,10 +17,10 @@
 
 | # | <center> Module <center> | Status |
 |:--:|:--|:--:|
-|1|Communication in a Connected World|🔄|
-|2|Network Components, Types, and Connections|⬜|
-|3|Wireless and Mobile Networks|⬜|
-|4|Build a Home Network|⬜|
+|1|Communication in a Connected World|✅|
+|2|Network Components, Types, and Connections|✅|
+|3|Wireless and Mobile Networks|✅|
+|4|Build a Home Network|🔄|
 |📝| **Checkpoint Exam:** Build a Small Network |⬜|
 |5| Communication Principles |⬜|
 |6| Network Media |⬜|
