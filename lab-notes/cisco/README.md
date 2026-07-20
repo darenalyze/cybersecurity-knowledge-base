@@ -4,4 +4,4 @@ This directory centralizes my official Cisco academy courses.
 
 ## 🎓 Enrolled Courses & Learning Paths
 
-- **[Networking Basics](./networking-basics/)** — (Status: Not Started ⬜)
+- **[Networking Basics](./networking-basics/)** — (Status: 🔄 On going)
