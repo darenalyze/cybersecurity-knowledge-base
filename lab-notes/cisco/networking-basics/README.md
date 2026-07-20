@@ -19,9 +19,9 @@
 |1|Communication in a Connected World|✅|
 |2|Network Components, Types, and Connections|✅|
 |3|Wireless and Mobile Networks|✅|
-|4|Build a Home Network|🔄|
-|📝| **Checkpoint Exam:** Build a Small Network |⬜|
-|5| Communication Principles |⬜|
+|4|Build a Home Network|✅|
+|📝| **Checkpoint Exam:** Build a Small Network |✅|
+|5| Communication Principles |🔄|
 |6| Network Media |⬜|
 |7| The Access Layer |⬜|
 |📝| **Checkpoint Exam:** Network Access |⬜|
