@@ -1,7 +1,6 @@
 # 🌐 Networking Basics
 > Basics of computer networking and discover how networks operate.
 - Free  
-- 22 Hours  
 - Beginner  
 - 13 Labs  
 - Self-paced  
