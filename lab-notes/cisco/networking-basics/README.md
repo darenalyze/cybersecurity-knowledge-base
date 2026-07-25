@@ -5,8 +5,6 @@
 - 13 Labs  
 - Self-paced  
 
-*I took this course to prove that i have solid basic foundation in basic networking*
-
 ## 📋 Progress Tracker
 
 ### 📌 Legends
