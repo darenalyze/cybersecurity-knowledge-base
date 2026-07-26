@@ -7,7 +7,7 @@ Welcome to my central security notebook. This repository is where I keep all my 
 ## 🎯 Learning Approach & Philosophy
 
 I view cybersecurity as a discipline that requires deep technical understanding rather than memorization:
-- **Documented with Intent:** Every course and module I complete is documented thoroughly with clear step-by-step walkthroughs.
+- **Documented with Intent:** Every course and module I complete is documented thoroughly in my own words with clear step-by-step walkthroughs to ensure true comprehension.
 - **Relentless Mechanics Research:** Whenever I encounter unfamiliar terminology, protocols, or acronyms, I research them down to their underlying mechanics until there is zero confusion left.
 - **Hands-on Application:** Theoretical knowledge is immediately tested and reinforced in virtual lab environments, network simulations, and real-world scenarios to build practical muscle memory.
 
@@ -30,14 +30,6 @@ My notes are organized into domain-specific modules:
 | **Networking** | ![Cisco NetAcad](https://img.shields.io/badge/Cisco_NetAcad-005073?style=flat&logo=cisco&logoColor=white) | Network topologies, OSI model, Cisco Packet Tracer |
 | **Linux Admin** | ![LabEx](https://img.shields.io/badge/LabEx-000000?style=flat&logo=linux&logoColor=white) | Terminal commands, file permissions, user management |
 | **Cybersecurity** | ![TryHackMe](https://img.shields.io/badge/TryHackMe-222831?style=flat&logo=tryhackme&logoColor=2196F3) | Red/Blue team basics, threat fundamentals |
-
----
-
-## 🛠️ Core Skills & Tools
-
-- **Operating Systems:** Linux (Kali Linux, Debian, basic administration) & Windows.
-- **Networking:** OSI/TCP-IP models, IP addressing, subnetting, ports, and protocols.
-- **Lab Environments:** Cisco Packet Tracer & VirtualBox.
 
 ---
 *I update these notes constantly as I complete more labs, courses, and research!*
