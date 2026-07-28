@@ -24,3 +24,11 @@ The second command we will use is `whoami`. I just type the whoami in the termin
 
 ### Displaying User and Group Information
 `id`: Command is a way to see what group thet specific user belong
+`id root`: Is a command to check the id of the superuser(root).
+
+**uid**: Your User ID (a unique numerical identifier).
+**gid**: Your primary Group ID.
+**groups**: All the groups you are a member of.
+
+root is the superuser – like the administrator of the system!
+
